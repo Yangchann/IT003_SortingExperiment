@@ -51,6 +51,6 @@ int main()
         quickSort(0, n - 1);
         auto finishtime = high_resolution_clock::now();
         cout << duration_cast<microseconds>(finishtime - starttime).count() << '\n';
-    }
+    } 
     return 0;
 }
