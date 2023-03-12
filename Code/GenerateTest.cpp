@@ -1,56 +1,42 @@
-#include <iostream>
-#include <cstdlib> 
-#include <ctime>   
-#include <string>
-#include <iomanip>
-#include <fstream>
-
+#include <bits/stdc++.h>
 using namespace std;
-const int N = 1e6;
-
-double generate(double min_val, double max_val)
+const int sizear = 1000000;
+int num[sizear + 5];
+void increasingnum()
 {
-    double range = max_val - min_val;
-    return (static_cast<double>(rand()) / (double)RAND_MAX) * range + min_val;
+    ofstream fo("test1.inp");
+    for (int i = 0; i < sizear; ++i)
+        num[i] = rand();
+    sort(num, num + sizear);
+    for (int i = 0; i < sizear; ++i)
+        fo << num[i] << ' ';
+    fo.close();
 }
-
+void decreasingnum()
+{
+    ofstream fo("test2.inp");
+    for (int i = 0; i < sizear; ++i)
+        num[i] = rand();
+    sort(num, num + sizear, greater<int>());
+    for (int i = 0; i < sizear; ++i)
+        fo << num[i] << ' ';
+    fo.close();
+}
+void randomnum()
+{
+    for (int i = 3; i <= 10; ++i)
+    {
+        string filename = "test" + to_string(i) + ".txt";
+        ofstream fo(filename);
+        for (int i = 0; i < sizear; ++i)
+            fo << rand() << ' ';
+        fo.close();
+    }
+}
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    srand(time(NULL));
-
-    {
-        double min_val = 0.0;
-        double max_val = 1000000.0;
-        string fileName = "test1.txt";
-        ofstream fo(fileName);
-        for (int i = 1; i <= N; i++)
-            fo << fixed << (min_val = generate(min_val, max_val)) << " ";
-        fo.close();
-    }
-
-    {
-        double min_val = 0.0;
-        double max_val = 1000000.0;
-        string fileName = "test2.txt";
-        ofstream fo(fileName);
-        for (int i = 1; i <= N; i++)
-            fo << fixed << (max_val = generate(min_val, max_val)) << " ";
-        fo.close();
-    }
-
-    double min_val = 0.0;
-    double max_val = 1000000.0;
-    for (int test = 3; test <= 10; test++)
-    {
-        string fileName = "test" + to_string(test) + ".txt";
-        ofstream fo(fileName);
-        for (int i = 1; i <= N; i++)
-            fo << fixed << generate(min_val, max_val) << " ";
-        fo.close();
-    }
-
+    increasingnum();
+    decreasingnum();
+    randomnum();
     return 0;
 }
